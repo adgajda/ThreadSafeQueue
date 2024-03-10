@@ -41,7 +41,7 @@ public:
         return ret;
     }
 
-    [[nodiscard]] bool empty() const
+    [[nodiscard]] bool is_empty() const
     {
         return size.load(std::memory_order_acquire) == 0;
     }
