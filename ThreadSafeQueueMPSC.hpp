@@ -8,10 +8,14 @@
 /* ThreadSafeQueue | Fast size check | Multiple Producers - Single Consumer */
 
 template<typename T>
-class ThreadSafeQueueMPSC
+class ThreadSafeQueueMPSC final
 {
 public:
     ThreadSafeQueueMPSC() = default;
+    ThreadSafeQueueMPSC(const ThreadSafeQueueMPSC&) = delete;
+    ThreadSafeQueueMPSC(ThreadSafeQueueMPSC&&) = delete;
+    ThreadSafeQueueMPSC& operator=(const ThreadSafeQueueMPSC&) = delete;
+    ThreadSafeQueueMPSC operator=(ThreadSafeQueueMPSC&&) = delete;
 
     void push(const T& val)
     {
