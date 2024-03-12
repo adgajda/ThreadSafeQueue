@@ -21,14 +21,14 @@ public:
     {
         const std::lock_guard guard(mutex);
         container.push(val);
-        size.fetch_add(1, std::memory_order_release);
+        size.fetch_add(1, std::memory_order_relaxed);
     }
 
     void push(T&& val)
     {
         const std::lock_guard guard(mutex);
         container.push(std::move(val));
-        size.fetch_add(1, std::memory_order_release);
+        size.fetch_add(1, std::memory_order_relaxed);
     }
 
     [[nodiscard]] T get_front_and_pop()
@@ -47,7 +47,7 @@ public:
 
     [[nodiscard]] bool is_empty() const
     {
-        return size.load(std::memory_order_acquire) == 0;
+        return size.load(std::memory_order_relaxed) == 0;
     }
 
 private:
